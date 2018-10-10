@@ -17,6 +17,23 @@ exports.getCurrentUser = function() {
   return userPool.getCurrentUser();
 };
 
+exports.listGroups = function(username) {
+  console.log(`Getting groups for user`, username);
+  let params = {
+    UserPoolId: poolData.UserPoolId,
+    Username: username
+  }
+
+  return new Promise((resolve, reject) => {
+    cognitoidentityserviceprovider.adminListGroupsForUser(params, (err, data) => {
+      if(err){
+        reject(err);
+      }
+      resolve(data);
+    });
+  });
+};
+
 exports.getUser = function(accessToken) {
   console.log(`Getting user for token: `, accessToken);
   var params = {

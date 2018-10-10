@@ -11,6 +11,16 @@ router.get('/current-user', function(req, res) {
   res.json({message: JSON.stringify(currentUser)})
 });
 
+router.post('/user-groups', function(req, res) {
+  cognito.listGroups(req.body.username)
+    .then(function(data){
+      res.json({message: data});
+    })
+    .catch(function(err){
+      res.json({error: err});
+    });
+});
+
 router.post('/user', function(req, res) {
   cognito.getUser(req.body.AccessToken)
     .then(function(data){
