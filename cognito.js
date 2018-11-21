@@ -7,7 +7,7 @@ var region = process.env.AWS_REGION || 'eu-west-2';
 var userPoolId = process.env.USER_POOL || `${region}_rmmxQMcc8`;
 var identityPoolId = process.env.IDENTITY_POOL || `${region}:61ae2fab-c204-4578-83b3-c0973838c372`;
 
-AWS.config.region = process.env.REGION;
+AWS.config.region = process.env.AWS_REGION;
 var poolData = {
   UserPoolId : process.env.USER_POOL,
     ClientId : process.env.CLIENT_ID
