@@ -1,0 +1,18 @@
+LOGIN PAGE
+
+
+<button (click)="login()">Login</button>
+
+<form>
+    <div class="form-group">
+        {{diagnostic}}
+
+        <label for="email">Email</label>
+        <input name="email" id="email" [(ngModel)]="user.email">
+        <label for="password">Password</label>
+        <input name="email" id="password" [(ngModel)]="user.password">
+    </div>
+
+    <button (click)="register()">Register</button>
+</form>
+
