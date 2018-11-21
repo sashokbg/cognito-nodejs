@@ -3,6 +3,9 @@ require('dotenv').load();
 
 var AWS = require('aws-sdk');
 var AWSCognito = require('amazon-cognito-identity-js');
+var region = process.env.AWS_REGION || 'eu-west-2';
+var userPoolId = process.env.USER_POOL || `${region}_rmmxQMcc8`;
+var identityPoolId = process.env.IDENTITY_POOL || `${region}:61ae2fab-c204-4578-83b3-c0973838c372`;
 
 AWS.config.region = process.env.REGION;
 var poolData = {
@@ -119,13 +122,13 @@ exports.login = function(login, password) {
             var accessToken = result.getAccessToken().getJwtToken();
 
             resolve(result);
-
+            var logins = {};
+            
+            logins[`cognito-idp.${region}.amazonaws.com/${userPoolId}`] = result.getIdToken().getJwtToken(); 
+            
             AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                IdentityPoolId : 'eu-west-2:61ae2fab-c204-4578-83b3-c0973838c372',
-                Logins : {
-                    // Change the key below according to the specific region your user pool is in.
-                    'cognito-idp.eu-west-2.amazonaws.com/eu-west-2_rmmxQMcc8' : result.getIdToken().getJwtToken()
-                }
+                IdentityPoolId : identityPoolId,
+                Logins : logins
             });
 
             //refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity()
