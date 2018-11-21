@@ -6,11 +6,12 @@ var AWSCognito = require('amazon-cognito-identity-js');
 var region = process.env.AWS_REGION || 'eu-west-2';
 var userPoolId = process.env.USER_POOL || `${region}_rmmxQMcc8`;
 var identityPoolId = process.env.IDENTITY_POOL || `${region}:61ae2fab-c204-4578-83b3-c0973838c372`;
+var clientId = process.env.CLIENT_ID || '3vm9u4heh4udklt7n0853q8fj9';
 
-AWS.config.region = process.env.AWS_REGION;
+AWS.config.region = region;
 var poolData = {
-  UserPoolId : process.env.USER_POOL,
-    ClientId : process.env.CLIENT_ID
+  UserPoolId : userPoolId,
+    ClientId : clientId
 };
 
 var userPool = new AWSCognito.CognitoUserPool(poolData);
@@ -41,7 +42,7 @@ exports.getUser = function(accessToken) {
   console.log(`Getting user for token: `, accessToken);
   var params = {
     AccessToken: accessToken
-  }
+  };
 
   return new Promise(function(resolve, reject) {
     cognitoidentityserviceprovider.getUser(params, function(err, data) {
@@ -71,12 +72,12 @@ exports.register = function(login, password, email, name, family_name) {
   var dataName = {
     Name: 'name',
     Value: name
-  }
+  };
   
   var dataFamilyName = {
     Name: 'family_name',
     Value: family_name
-  }
+  };
 
   var attributeEmail = new AWSCognito.CognitoUserAttribute(dataEmail);
   var attributeName = new AWSCognito.CognitoUserAttribute(dataName);
@@ -100,7 +101,7 @@ exports.register = function(login, password, email, name, family_name) {
 
     });
   //});
-}
+};
 
 exports.login = function(login, password) {
   console.log(`Authenticating with cognito ${login} / ${password}`);
@@ -144,7 +145,7 @@ exports.login = function(login, password) {
         },
 
         onFailure: function(err) {
-            var errorMessage = err.message || JSON.stringify(err)
+            var errorMessage = err.message || JSON.stringify(err);
             console.log(errorMessage);
             reject(errorMessage);
         },

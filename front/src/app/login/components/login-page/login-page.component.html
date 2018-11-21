@@ -6,11 +6,14 @@ LOGIN PAGE
 <form>
     <div class="form-group">
         {{diagnostic}}
+        <br>
 
         <label for="email">Email</label>
         <input name="email" id="email" [(ngModel)]="user.email">
+        <br>
         <label for="password">Password</label>
         <input name="email" id="password" [(ngModel)]="user.password">
+        <br>
     </div>
 
     <button (click)="register()">Register</button>
