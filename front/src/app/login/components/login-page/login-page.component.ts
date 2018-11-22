@@ -13,6 +13,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class LoginPageComponent {
     user = new User();
+    result = '';
 
     constructor() {
         const region = environment.region;
@@ -37,7 +38,11 @@ export class LoginPageComponent {
 
     login() {
         Auth.signIn(this.user.email, this.user.password)
-            .then(user => console.log(user))
+            .then(
+                (user) => {
+                    console.log(user);
+                    this.result = JSON.stringify(user, null, 2);
+                })
             .catch(err => console.log(err));
     }
 
