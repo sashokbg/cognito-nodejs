@@ -5,6 +5,7 @@ import {CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js'
 import {User} from './user';
 import Amplify from 'aws-amplify';
 import {Auth} from 'aws-amplify';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-login-page',
@@ -14,10 +15,10 @@ export class LoginPageComponent {
     user = new User();
 
     constructor() {
-        const region = 'eu-west-2';
-        const userPoolId = `${region}_rmmxQMcc8`;
-        const identityPoolId = `${region}:61ae2fab-c204-4578-83b3-c0973838c372`;
-        const clientId = `3vm9u4heh4udklt7n0853q8fj9`;
+        const region = environment.region;
+        const userPoolId = environment.userPoolId;
+        const identityPoolId = environment.identityPoolId;
+        const clientId = environment.clientId;
 
         Amplify.configure({
             Auth: {
