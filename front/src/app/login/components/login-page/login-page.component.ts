@@ -5,7 +5,7 @@ import {CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js'
 import {User} from './user';
 import Amplify from 'aws-amplify';
 import {Auth} from 'aws-amplify';
-import { environment } from '../../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-login-page',
@@ -14,6 +14,7 @@ import { environment } from '../../../../environments/environment';
 export class LoginPageComponent {
     user = new User();
     result = '';
+    error = '';
 
     constructor() {
         const region = environment.region;
@@ -39,11 +40,14 @@ export class LoginPageComponent {
     login() {
         Auth.signIn(this.user.email, this.user.password)
             .then(
-                (user) => {
-                    console.log(user);
-                    this.result = JSON.stringify(user, null, 2);
-                })
-            .catch(err => console.log(err));
+            (user) => {
+                console.log(user);
+                this.result = JSON.stringify(user, null, 2);
+            })
+            .catch((err) => {
+                console.log(err);
+                this.error = JSON.stringify(err);
+            });
     }
 
     get diagnostic() {

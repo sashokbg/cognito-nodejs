@@ -15,10 +15,11 @@ LOGIN PAGE
         <input name="email" id="password" [(ngModel)]="user.password">
         <br>
         <hr/>
+        <div style="color: red">{{error}}</div>
         <textarea style="width: 1280px; height: 500px" [value]="result">
         </textarea>
     </div>
 
+
     <button (click)="register()">Register</button>
 </form>
-
