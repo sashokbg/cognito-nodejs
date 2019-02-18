@@ -42,10 +42,13 @@ export class LoginPageComponent implements OnInit {
     }
 
     changePassword() {
-        console.log('Changing user password');
+        console.log('Change First Time Password');
         Auth.completeNewPassword(this.loggedInUser, this.authInfo.password, null)
             .then(data => console.log(data))
-            .catch(error => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                this.error = JSON.stringify(error);
+            });
     }
 
     login() {
@@ -64,7 +67,13 @@ export class LoginPageComponent implements OnInit {
             (user) => {
                 console.log(user);
                 this.loggedInUser = user;
-                this.result = JSON.stringify(user.signInUserSession, null, 2);
+
+                if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+                    this.error = 'This user needs to change their password. See field below.';
+                } else {
+                    this.result = JSON.stringify(user.signInUserSession, null, 2);
+                }
+
             })
             .catch((err) => {
                 console.log(err);
