@@ -5,4 +5,5 @@ export class AuthInfo {
     public clientId;
     public authenticationFlowType;
     public password;
+    public shortcutName;
 }

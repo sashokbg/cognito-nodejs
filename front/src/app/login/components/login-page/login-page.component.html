@@ -1,21 +1,34 @@
 LOGIN PAGE
 
 
-<button (click)="login()">Login</button>
+
+<b>shortCuts : </b>
+<div >
+  <button *ngFor="let info of savedAuthAndUserInfos" (click)="changeAuthInfosFromShortcut(info)">
+      {{info.shortcutName}}
+
+  </button>
+</div>
+
+<br>
+<br>
+
+<button (click)="login()">Login</button>  <input [(ngModel)]="authInfo.shortcutName" placeholder="shortcut to reuse profile later" >
+
 <br>
 Region:<br>
 <input [(ngModel)]="authInfo.region" (ngModelChange)="saveRegion($event)">
 <br>
-UserPoolId:<br>
+UserPoolId*:<br>
 <input [(ngModel)]="authInfo.userPoolId" (ngModelChange)="saveUserPool($event)">
 <br>
 IdentityPoolId:<br>
 <input [(ngModel)]="authInfo.identityPoolId" (ngModelChange)="saveIdentityPool($event)">
 <br>
-clientId:<br>
+clientId*:<br>
 <input [(ngModel)]="authInfo.clientId" (ngModelChange)="saveClientId($event)">
 <br>
-FlowType
+FlowType*
 <select [(ngModel)]="authInfo.authenticationFlowType" (ngModelChange)="saveAuthFlow($event)">
     <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
     <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
