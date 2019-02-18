@@ -2,15 +2,25 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const region = 'eu-west-2';
+const region = 'eu-west-1';
 
 export const environment = {
     production: false,
     region: region,
-    userPoolId: `${region}_rmmxQMcc8`,
-    identityPoolId: `${region}:61ae2fab-c204-4578-83b3-c0973838c372`,
-    clientId: '3vm9u4heh4udklt7n0853q8fj9'
+    userPoolId: `${region}_Vzb5mzwMu`,
+    identityPoolId: `${region}:aa0c57d0-da3d-4bb9-b78c-1578e56a243d`,
+    clientId: '33i5noit6u8kmtgn02ljt48uvd'
 };
+
+// Alex
+// export const environment = {
+//     production: false,
+//     region: region,
+//     userPoolId: `${region}_WC6Dj24iI`,
+//     // identityPoolId: `${region}:f30a972c-2f62-41ca-9b88-d46fa041ae1b`,
+//     clientId: '6m9lvj8kd2b42hmt8npph0bbuk'
+// };
+
 
 /*
  * In development mode, for easier debugging, you can ignore zone related error

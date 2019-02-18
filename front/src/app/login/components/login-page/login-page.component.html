@@ -3,9 +3,31 @@ LOGIN PAGE
 
 <button (click)="login()">Login</button>
 
+Region:<br>
+<input [(ngModel)]="authInfo.region">
+<br>
+UserPoolId:<br>
+<input [(ngModel)]="authInfo.userPoolId">
+<br>
+IdentityPoolId:<br>
+<input [(ngModel)]="authInfo.identityPoolId">
+<br>
+clientId:<br>
+<input [(ngModel)]="authInfo.clientId">
+<br>
+FlowType
+<select [(ngModel)]="authInfo.authenticationFlowType">
+    <option>USER_PASSWORD_AUTH</option>
+    <option>ADMIN_NO_SRP_AUTHENTICATION</option>
+</select>
+<br>
+
 <form>
     <div class="form-group">
-        {{diagnostic}}
+        <div style="border: 1px solid black">
+            {{diagnostic}}<br>
+            {{diagnosticAuth}}
+        </div>
         <br>
 
         <label for="email">Email</label>
@@ -23,3 +45,8 @@ LOGIN PAGE
 
     <button (click)="register()">Register</button>
 </form>
+
+<hr>
+
+<input [(ngModel)]="authInfo.password">
+<button (click)="changePassword()">Change password</button>

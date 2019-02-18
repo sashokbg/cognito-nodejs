@@ -6,10 +6,13 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
-  declarations: [LoginPageComponent],
+  declarations: [
+      LoginPageComponent,
+  ],
   providers: [AuthGuardService, AuthService],
     imports: [FormsModule, BrowserModule]
 })
 export class LoginModule {
 
 }
+

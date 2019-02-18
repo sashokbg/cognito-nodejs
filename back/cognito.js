@@ -2,11 +2,19 @@ global.fetch = require('node-fetch')
 require('dotenv').load();
 
 var AWS = require('aws-sdk');
+
+// var AWSCognito = require('amazon-cognito-identity-js');
+// var region = process.env.AWS_REGION || 'eu-west-2';
+// var userPoolId = process.env.USER_POOL || `${region}_rmmxQMcc8`;
+// var identityPoolId = process.env.IDENTITY_POOL || `${region}:61ae2fab-c204-4578-83b3-c0973838c372`;
+// var clientId = process.env.CLIENT_ID || '3vm9u4heh4udklt7n0853q8fj9';
+
 var AWSCognito = require('amazon-cognito-identity-js');
-var region = process.env.AWS_REGION || 'eu-west-2';
-var userPoolId = process.env.USER_POOL || `${region}_rmmxQMcc8`;
-var identityPoolId = process.env.IDENTITY_POOL || `${region}:61ae2fab-c204-4578-83b3-c0973838c372`;
-var clientId = process.env.CLIENT_ID || '3vm9u4heh4udklt7n0853q8fj9';
+var region = process.env.AWS_REGION || 'eu-west-1';
+var userPoolId = process.env.USER_POOL || `${region}_BrRwXkQJP`;
+var identityPoolId = process.env.IDENTITY_POOL || `${region}:f30a972c-2f62-41ca-9b88-d46fa041ae1b`;
+var clientId = process.env.CLIENT_ID || '33o1c2gj9bikl4r50340fnr08b';
+
 
 AWS.config.region = region;
 var poolData = {
