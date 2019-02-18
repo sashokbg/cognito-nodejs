@@ -2,39 +2,34 @@ LOGIN PAGE
 
 
 <button (click)="login()">Login</button>
-
+<br>
 Region:<br>
-<input [(ngModel)]="authInfo.region">
+<input [(ngModel)]="authInfo.region" (ngModelChange)="saveRegion($event)">
 <br>
 UserPoolId:<br>
-<input [(ngModel)]="authInfo.userPoolId">
+<input [(ngModel)]="authInfo.userPoolId" (ngModelChange)="saveUserPool($event)">
 <br>
 IdentityPoolId:<br>
-<input [(ngModel)]="authInfo.identityPoolId">
+<input [(ngModel)]="authInfo.identityPoolId" (ngModelChange)="saveIdentityPool($event)">
 <br>
 clientId:<br>
-<input [(ngModel)]="authInfo.clientId">
+<input [(ngModel)]="authInfo.clientId" (ngModelChange)="saveClientId($event)">
 <br>
 FlowType
-<select [(ngModel)]="authInfo.authenticationFlowType">
-    <option>USER_PASSWORD_AUTH</option>
-    <option>ADMIN_NO_SRP_AUTHENTICATION</option>
+<select [(ngModel)]="authInfo.authenticationFlowType" (ngModelChange)="saveAuthFlow($event)">
+    <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
+    <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
 </select>
 <br>
 
 <form>
     <div class="form-group">
-        <div style="border: 1px solid black">
-            {{diagnostic}}<br>
-            {{diagnosticAuth}}
-        </div>
         <br>
-
         <label for="email">Email</label>
-        <input name="email" id="email" [(ngModel)]="user.email">
+        <input name="email" id="email" [(ngModel)]="user.email" (ngModelChange)="saveMail($event)" autocomplete="off">
         <br>
         <label for="password">Password</label>
-        <input name="email" id="password" [(ngModel)]="user.password">
+        <input name="email" id="password" [(ngModel)]="user.password" type="password">
         <br>
         <hr/>
         <div style="color: red">{{error}}</div>

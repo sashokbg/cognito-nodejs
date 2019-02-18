@@ -1,27 +1,40 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
 import {User} from './user';
 import Amplify, {Auth} from 'aws-amplify';
-import {environment} from '../../../../environments/environment';
 import {AuthInfo} from './authInfo';
+
+const EMAIL = 'cognito-login-mail';
+const REGION = 'cognito-region';
+const USER_POOL = 'cognito-user-pool';
+const IDENTITY_POOL = 'cognito-identity-pool';
+const CLIENT_ID = 'cognito-client-id';
+const AUTH_FLOW = 'cognito-auth-flow';
 
 @Component({
     selector: 'app-login-page',
     templateUrl: 'login-page.component.html'
 })
-export class LoginPageComponent {
-    user = new User();
-    authInfo = new AuthInfo();
+export class LoginPageComponent implements OnInit {
+    user: User;
+    authInfo: AuthInfo;
 
     result = '';
     error = '';
     private loggedInUser;
 
-    constructor() {
-        this.authInfo.clientId = environment.clientId;
-        // this.authInfo.identityPoolId = environment.identityPoolId;
-        this.authInfo.region = environment.region;
-        this.authInfo.userPoolId = environment.userPoolId;
+
+    ngOnInit(): void {
+        this.user = new User();
+        this.authInfo = new AuthInfo();
+
+        this.user.email = localStorage.getItem(EMAIL) || '';
+        this.authInfo.identityPoolId = localStorage.getItem(IDENTITY_POOL) || '';
+        this.authInfo.userPoolId = localStorage.getItem(USER_POOL) || '';
+        this.authInfo.region = localStorage.getItem(REGION) || '';
+        this.authInfo.clientId = localStorage.getItem(CLIENT_ID) || '';
+
+        this.authInfo.authenticationFlowType = localStorage.getItem(AUTH_FLOW) || '';
     }
 
     register() {
@@ -65,5 +78,29 @@ export class LoginPageComponent {
 
     get diagnosticAuth() {
         return JSON.stringify(this.authInfo);
+    }
+
+    saveMail($event) {
+        localStorage.setItem(EMAIL, $event);
+    }
+
+    saveRegion($event: {}) {
+        localStorage.setItem(REGION, $event.toString());
+    }
+
+    saveUserPool($event: {}) {
+        localStorage.setItem(USER_POOL, $event.toString());
+    }
+
+    saveIdentityPool($event: {}) {
+        localStorage.setItem(IDENTITY_POOL, $event.toString());
+    }
+
+    saveClientId($event: {}) {
+        localStorage.setItem(CLIENT_ID, $event.toString());
+    }
+
+    saveAuthFlow($event: {}) {
+        localStorage.setItem(AUTH_FLOW, $event.toString());
     }
 }
