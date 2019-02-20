@@ -1,60 +1,58 @@
-LOGIN PAGE
-
-
-
-<b>shortCuts : </b>
-<div >
-  <button *ngFor="let info of savedAuthAndUserInfos" (click)="changeAuthInfosFromShortcut(info)">
-      {{info.shortcutName}}
-
-  </button>
-</div>
-
-<br>
-<br>
-
-<button (click)="login()">Login</button>  <input [(ngModel)]="authInfo.shortcutName" placeholder="shortcut to reuse profile later" >
-
-<br>
-Region:<br>
-<input [(ngModel)]="authInfo.region" (ngModelChange)="saveRegion($event)">
-<br>
-UserPoolId*:<br>
-<input [(ngModel)]="authInfo.userPoolId" (ngModelChange)="saveUserPool($event)">
-<br>
-IdentityPoolId:<br>
-<input [(ngModel)]="authInfo.identityPoolId" (ngModelChange)="saveIdentityPool($event)">
-<br>
-clientId*:<br>
-<input [(ngModel)]="authInfo.clientId" (ngModelChange)="saveClientId($event)">
-<br>
-FlowType*
-<select [(ngModel)]="authInfo.authenticationFlowType" (ngModelChange)="saveAuthFlow($event)">
-    <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
-    <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
-</select>
-<br>
-
-<form>
-    <div class="form-group">
-        <br>
-        <label for="email">Email</label>
-        <input name="email" id="email" [(ngModel)]="user.email" (ngModelChange)="saveMail($event)" autocomplete="off">
-        <br>
-        <label for="password">Password</label>
-        <input name="email" id="password" [(ngModel)]="user.password" type="password">
-        <br>
-        <hr/>
-        <div style="color: red">{{error}}</div>
-        <textarea style="width: 1280px; height: 500px" [value]="result">
-        </textarea>
+<div class="container">
+    <div class="favorites">
+        <b>Favorites: </b>
+        <div >
+            <button *ngFor="let info of savedAuthAndUserInfos" (click)="changeAuthInfosFromShortcut(info)">
+                {{info.shortcutName}}
+            </button>
+            <input [(ngModel)]="authInfo.shortcutName" placeholder="Config name" >
+            <button (click)="saveConfig()" id="save">Save Config</button>
+            <button (click)="deleteConfig()" id="delete">Delete Config</button>
+        </div>
     </div>
 
+    <br>
+    Region:<br>
+    <input [(ngModel)]="authInfo.region" (ngModelChange)="saveRegion($event)">
+    <br>
+    UserPoolId*:<br>
+    <input [(ngModel)]="authInfo.userPoolId" (ngModelChange)="saveUserPool($event)">
+    <br>
+    IdentityPoolId:<br>
+    <input [(ngModel)]="authInfo.identityPoolId" (ngModelChange)="saveIdentityPool($event)">
+    <br>
+    clientId*:<br>
+    <input [(ngModel)]="authInfo.clientId" (ngModelChange)="saveClientId($event)">
+    <br>
+    FlowType*
+    <br>
+    <select [(ngModel)]="authInfo.authenticationFlowType" (ngModelChange)="saveAuthFlow($event)">
+        <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
+        <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
+    </select>
+    <br>
 
-    <button (click)="register()">Register</button>
-</form>
 
-<hr>
+    <form>
+        <div class="form-group">
+            <br>
+            <label for="email">Email</label>
+            <input name="email" id="email" [(ngModel)]="user.email" (ngModelChange)="saveMail($event)" autocomplete="off">
+            <br>
+            <label for="password">Password</label>
+            <input name="email" id="password" [(ngModel)]="user.password" type="password">
+            <button (click)="login()">Login</button>
+            <br>
+            <hr/>
+            <div style="color: red">{{error}}</div>
+            <textarea style="width: 1280px; height: 500px" [value]="result">
+        </textarea>
+        </div>
+    </form>
 
-<input [(ngModel)]="authInfo.password">
-<button (click)="changePassword()">Change password</button>
+    <hr>
+    <input [(ngModel)]="authInfo.password">
+    <button (click)="changePassword()">Change password</button>
+
+</div>
+

@@ -84,15 +84,13 @@ export class LoginPageComponent implements OnInit {
                 console.log(err);
                 this.error = JSON.stringify(err);
             });
-
-            this.saveAuthInfoInShortcut();
     }
 
     saveAuthInfoInShortcut(): void {
       if (this.authInfo.shortcutName) {
         const { password, ...objectToSave } = {...this.authInfo, ...this.user}; // on copie tout dans objectToSave sauf password
         console.log('objectToSave', objectToSave);
-         localStorage.setItem(`${this.shortcuteLocalStoragePrefix}${this.authInfo.shortcutName}`, JSON.stringify(objectToSave));
+        localStorage.setItem(`${this.shortcuteLocalStoragePrefix}${this.authInfo.shortcutName}`, JSON.stringify(objectToSave));
       }
     }
 
@@ -163,4 +161,12 @@ export class LoginPageComponent implements OnInit {
       return results;
     }
 
-  }
+    saveConfig() {
+        this.saveAuthInfoInShortcut();
+    }
+
+    deleteConfig() {
+        console.log('Deleting config', this.authInfo.shortcutName);
+        localStorage.removeItem(`${this.shortcuteLocalStoragePrefix}${this.authInfo.shortcutName}`);
+    }
+}
