@@ -1,43 +1,32 @@
 <div class="container">
-    <div class="favorites">
-        <b>Favorites: </b>
-        <div >
-            <button *ngFor="let info of savedAuthAndUserInfos" (click)="changeAuthInfosFromShortcut(info)">
-                {{info.shortcutName}}
-            </button>
-            <input [(ngModel)]="authInfo.shortcutName" placeholder="Config name" >
-            <button (click)="saveConfig()" id="save">Save Config</button>
-            <button (click)="deleteConfig()" id="delete">Delete Config</button>
-        </div>
-    </div>
+    <app-favorites [authInfo]="authInfo" [user]="user"></app-favorites>
 
     <br>
     Region:<br>
-    <input [(ngModel)]="authInfo.region" (ngModelChange)="saveRegion($event)">
+    <input [(ngModel)]="authInfo.region">
     <br>
     UserPoolId*:<br>
-    <input [(ngModel)]="authInfo.userPoolId" (ngModelChange)="saveUserPool($event)">
+    <input [(ngModel)]="authInfo.userPoolId">
     <br>
     IdentityPoolId:<br>
-    <input [(ngModel)]="authInfo.identityPoolId" (ngModelChange)="saveIdentityPool($event)">
+    <input [(ngModel)]="authInfo.identityPoolId">
     <br>
     clientId*:<br>
-    <input [(ngModel)]="authInfo.clientId" (ngModelChange)="saveClientId($event)">
+    <input [(ngModel)]="authInfo.clientId">
     <br>
     FlowType*
     <br>
-    <select [(ngModel)]="authInfo.authenticationFlowType" (ngModelChange)="saveAuthFlow($event)">
+    <select [(ngModel)]="authInfo.authenticationFlowType">
         <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
         <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
     </select>
     <br>
 
-
     <form>
         <div class="form-group">
             <br>
             <label for="email">Email</label>
-            <input name="email" id="email" [(ngModel)]="user.email" (ngModelChange)="saveMail($event)" autocomplete="off">
+            <input name="email" id="email" [(ngModel)]="user.email" autocomplete="off">
             <br>
             <label for="password">Password</label>
             <input name="email" id="password" [(ngModel)]="user.password" type="password">

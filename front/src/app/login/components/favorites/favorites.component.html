@@ -1,0 +1,11 @@
+<div class="favorites">
+    <b>Favorites: </b>
+    <div >
+        <button *ngFor="let info of savedAuthAndUserInfos" (click)="changeAuthInfosFromShortcut(info)">
+            {{info.shortcutName}}
+        </button>
+        <input [(ngModel)]="authInfo.shortcutName" placeholder="Config name" >
+        <button (click)="saveAuthInfoInShortcut()" id="save">Save Config</button>
+        <button (click)="deleteConfig()" id="delete">Delete Config</button>
+    </div>
+</div>

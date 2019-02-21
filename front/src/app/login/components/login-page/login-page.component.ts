@@ -19,12 +19,9 @@ export class LoginPageComponent implements OnInit {
     user: User;
     authInfo: AuthInfo;
 
-    savedAuthAndUserInfos: any[];
-
     result = '';
     error = '';
     private loggedInUser;
-    shortcuteLocalStoragePrefix = 'profile__';
 
     ngOnInit(): void {
         this.user = new User();
@@ -37,9 +34,6 @@ export class LoginPageComponent implements OnInit {
         this.authInfo.clientId = localStorage.getItem(CLIENT_ID) || '';
 
         this.authInfo.authenticationFlowType = localStorage.getItem(AUTH_FLOW) || '';
-
-        this.savedAuthAndUserInfos = this.findAuthDetailslist();
-        console.log('this.savedAuthInfos', this.savedAuthAndUserInfos);
     }
 
     register() {
@@ -84,89 +78,5 @@ export class LoginPageComponent implements OnInit {
                 console.log(err);
                 this.error = JSON.stringify(err);
             });
-    }
-
-    saveAuthInfoInShortcut(): void {
-      if (this.authInfo.shortcutName) {
-        const { password, ...objectToSave } = {...this.authInfo, ...this.user}; // on copie tout dans objectToSave sauf password
-        console.log('objectToSave', objectToSave);
-        localStorage.setItem(`${this.shortcuteLocalStoragePrefix}${this.authInfo.shortcutName}`, JSON.stringify(objectToSave));
-      }
-    }
-
-    changeAuthInfosFromShortcut(authAndUserInfo: any) {
-      console.log('changeAuthInfosFromShortcut. authAndUserInfo', authAndUserInfo);
-
-      this.authInfo.authenticationFlowType = authAndUserInfo.authenticationFlowType;
-      this.authInfo.clientId = authAndUserInfo.clientId;
-      this.authInfo.identityPoolId = authAndUserInfo.identityPoolId;
-      this.authInfo.region = authAndUserInfo.region;
-      this.authInfo.shortcutName = authAndUserInfo.shortcutName;
-      this.authInfo.userPoolId = authAndUserInfo.userPoolId;
-      this.user.email = authAndUserInfo.email;
-
-    }
-
-    get diagnostic() {
-        return JSON.stringify(this.user);
-    }
-
-    get diagnosticAuth() {
-        return JSON.stringify(this.authInfo);
-    }
-
-    saveMail($event) {
-        localStorage.setItem(EMAIL, $event);
-    }
-
-    saveRegion($event: {}) {
-        localStorage.setItem(REGION, $event.toString());
-    }
-
-    saveUserPool($event: {}) {
-        localStorage.setItem(USER_POOL, $event.toString());
-    }
-
-    saveIdentityPool($event: {}) {
-        localStorage.setItem(IDENTITY_POOL, $event.toString());
-    }
-
-    saveClientId($event: {}) {
-        localStorage.setItem(CLIENT_ID, $event.toString());
-    }
-
-    saveAuthFlow($event: {}) {
-      localStorage.setItem(AUTH_FLOW, $event.toString());
-    }
-
-    findAuthDetailslist(): any[] {
-      return this.findLocalItems(this.shortcuteLocalStoragePrefix).map(
-        (item) => item.val
-      ) ;
-    }
-
-    findLocalItems (query: string): any[] {
-      let i;
-      const results = [];
-
-      for (i in localStorage) {
-        if (localStorage.hasOwnProperty(i)) {
-          if (i.match(query) || (!query && typeof i === 'string')) {
-            const value = JSON.parse(localStorage.getItem(i));
-            results.push({key: i, val: value});
-          }
-        }
-      }
-
-      return results;
-    }
-
-    saveConfig() {
-        this.saveAuthInfoInShortcut();
-    }
-
-    deleteConfig() {
-        console.log('Deleting config', this.authInfo.shortcutName);
-        localStorage.removeItem(`${this.shortcuteLocalStoragePrefix}${this.authInfo.shortcutName}`);
     }
 }
