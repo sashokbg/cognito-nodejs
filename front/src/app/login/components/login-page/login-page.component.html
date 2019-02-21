@@ -1,45 +1,55 @@
 <div class="container">
-    <app-favorites [authInfo]="authInfo" [user]="user"></app-favorites>
+    <div class="header">
+        <app-favorites [authInfo]="authInfo" [user]="user"></app-favorites>
+    </div>
+    <div class="left-column">
+        <div class="cognito-form">
+            <br>
+            Region:<br>
+            <input [(ngModel)]="authInfo.region">
+            <br>
+            UserPoolId*:<br>
+            <input [(ngModel)]="authInfo.userPoolId">
+            <br>
+            IdentityPoolId:<br>
+            <input [(ngModel)]="authInfo.identityPoolId">
+            <br>
+            clientId*:<br>
+            <input [(ngModel)]="authInfo.clientId">
+            <br>
+            FlowType*
+            <br>
+            <select [(ngModel)]="authInfo.authenticationFlowType">
+                <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
+                <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
+            </select>
+            <br>
 
-    <br>
-    Region:<br>
-    <input [(ngModel)]="authInfo.region">
-    <br>
-    UserPoolId*:<br>
-    <input [(ngModel)]="authInfo.userPoolId">
-    <br>
-    IdentityPoolId:<br>
-    <input [(ngModel)]="authInfo.identityPoolId">
-    <br>
-    clientId*:<br>
-    <input [(ngModel)]="authInfo.clientId">
-    <br>
-    FlowType*
-    <br>
-    <select [(ngModel)]="authInfo.authenticationFlowType">
-        <option value="USER_PASSWORD_AUTH">USER_PASSWORD_AUTH</option>
-        <option value="ADMIN_NO_SRP_AUTHENTICATION">ADMIN_NO_SRP_AUTHENTICATION</option>
-    </select>
-    <br>
-
-    <form>
-        <div class="form-group">
-            <br>
-            <label for="email">Email</label>
-            <input name="email" id="email" [(ngModel)]="user.email" autocomplete="off">
-            <br>
-            <label for="password">Password</label>
-            <input name="email" id="password" [(ngModel)]="user.password" type="password">
-            <button (click)="login()">Login</button>
-            <br>
-            <hr/>
-            <div style="color: red">{{error}}</div>
-            <textarea style="width: 1280px; height: 500px" [value]="result">
-        </textarea>
+            <form>
+                <div class="form-group">
+                    <br>
+                    <label for="email">Email</label>
+                    <br>
+                    <input name="email" id="email" [(ngModel)]="user.email" autocomplete="off">
+                    <br>
+                    <label for="password">Password</label>
+                    <br>
+                    <input name="email" id="password" [(ngModel)]="user.password" type="password">
+                    <br>
+                    <button (click)="login()">Login</button>
+                    <br>
+                    <div style="color: red">{{error}}</div>
+                </div>
+            </form>
         </div>
-    </form>
 
-    <hr>
+    </div>
+    <div class="right-column">
+        <div class="result" >
+            <textarea style="width: 1280px; height: 500px" [value]="result"></textarea>
+        </div>
+    </div>
+
     <input [(ngModel)]="authInfo.password">
     <button (click)="changePassword()">Change password</button>
 

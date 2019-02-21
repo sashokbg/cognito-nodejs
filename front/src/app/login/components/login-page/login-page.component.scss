@@ -1,0 +1,23 @@
+.container{
+    background-color: azure;
+    display: flex;
+    flex-wrap: wrap;
+
+    .header{
+        flex: 1 1 100%;
+        background-color: lightgray;
+        padding: 30px;
+    }
+
+    .left-column{
+        .cognito-form{
+            padding: 20px;
+        }
+    }
+
+    .right-column{
+        .result{
+            padding: 20px;
+        }
+    }
+}
