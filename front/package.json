@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "deploy": "aws s3 sync dist/cognito-login-app s3://ddf-cognito-login",
+    "deploy": "aws s3 rm s3://ddf-cognito-login/ --recursive && aws s3 sync dist/cognito-login-app s3://ddf-cognito-login --acl public-read",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
