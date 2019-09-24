@@ -18,67 +18,13 @@ declare const gapi: any;
     templateUrl: 'login-page.component.html',
     styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit, AfterViewInit {
+export class LoginPageComponent implements OnInit {
     user: User;
     authInfo: AuthInfo;
 
     result = '';
     error = '';
     private loggedInUser;
-
-
-    public auth2: any;
-
-    public googleInit() {
-        gapi.load('auth2', () => {
-            this.auth2 = gapi.auth2.init({
-                client_id: '938317867953-2l66pbqk0jhmdjr5taqisjo14tisjn17.apps.googleusercontent.com',
-                cookiepolicy: 'single_host_origin',
-                scope: 'profile email openid'
-            });
-            this.attachSignin(document.getElementById('googleBtn'));
-        });
-    }
-
-    public attachSignin(element) {
-        this.auth2.attachClickHandler(element, {},
-            (googleUser) => {
-                const profile = googleUser.getBasicProfile();
-                console.log('Token || ' + googleUser.getAuthResponse().id_token);
-                console.log('ID: ' + profile.getId());
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
-
-                Amplify.configure({
-                    Auth: {
-                        region: this.authInfo.region,
-                        identityPoolId: this.authInfo.identityPoolId
-                    }
-                });
-
-                Auth.federatedSignIn(
-                    'google',
-                    {
-                        token: googleUser.getAuthResponse().id_token,
-                        expires_at: 3600 * 1000 + new Date().getTime() // the expiration timestamp
-                    },
-                    null
-                ).then(cred => {
-                    // If success, you will get the AWS credentials
-                    console.log(cred);
-                }).catch((error) => {
-                    console.log('Error Federated Signin: ', error);
-                });
-
-            }, (error) => {
-                alert(JSON.stringify(error, undefined, 2));
-            });
-    }
-
-    ngAfterViewInit() {
-        this.googleInit();
-    }
 
     ngOnInit(): void {
         this.user = new User();
